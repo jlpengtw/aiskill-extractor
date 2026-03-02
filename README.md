@@ -141,7 +141,7 @@ http://localhost:5000/report/demo
 | 項目 | 技術 |
 |------|------|
 | 對話介面 | OpenClaw + WhatsApp |
-| AI Model | MiniMax / OpenAI / Gemini |
+| AI Model | OpenAI / Gemini |
 | 資料庫 | SQLite |
 | 網頁 | Flask + HTML/CSS |
 | 部署 | Server (Ubuntu) |
