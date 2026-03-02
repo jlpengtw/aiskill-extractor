@@ -1,4 +1,4 @@
-# 🏆 獎金獵人 (Bonus Hunter)
+# AI Skill Extractor
 ## AI Employee Capability Evaluation System
 
 ---
@@ -31,7 +31,7 @@
 │                         ┌──────▼──────┐                │
 │                         │  Evaluator  │                │
 │                         │    Agent    │                │
-│                         └──────┬──────┘                │
+│                         └─────────────┘                │
 │                                │                        │
 │                         📊 評估報告                   │
 │                                                          │
@@ -54,14 +54,14 @@
 ## 專案結構
 
 ```
-bonus_hunter/
+aiskill_extractor/
 ├── prompts/                    # AI Prompts
 │   ├── companion_prompt.py     # Companion Agent Prompt
 │   ├── evidence_extraction_prompt.py
 │   └── evaluator_prompt.py
 ├── src/                       # 程式碼
 │   ├── evaluator.py           # 評估引擎
-│   └── report_server.py       # 報告網頁伺服器
+│   └── report_server.py      # 報告網頁伺服器
 ├── data/                      # 資料庫
 │   └── evidence.db            # SQLite 資料庫
 ├── reports/                   # 報告模板
@@ -78,14 +78,12 @@ bonus_hunter/
 ```bash
 # 安裝 Flask
 pip install flask
-
-# 安裝 SQLite（通常已內建）
 ```
 
 ### 2. 初始化資料庫
 
 ```bash
-cd /home/jlpeng/.openclaw/workspace/bonus_hunter/src
+cd src
 python evaluator.py
 ```
 
@@ -147,32 +145,6 @@ http://localhost:5000/report/demo
 | 資料庫 | SQLite |
 | 網頁 | Flask + HTML/CSS |
 | 部署 | Server (Ubuntu) |
-
----
-
-## 使用方式
-
-### 新增員工
-
-```python
-from evaluator import add_employee, add_conversation
-
-# 新增員工
-emp_id = add_employee("王小明", "研發部", "工程師", "5年經驗")
-
-# 新增對話
-add_conversation(emp_id, "user", "今天處理了一個緊急問題")
-add_conversation(emp_id, "assistant", "請問你是如何處理的？")
-```
-
-### 產生評估
-
-```python
-from evaluator import generate_evaluation
-
-result = generate_evaluation(employee_id)
-print(json.dumps(result, indent=2))
-```
 
 ---
 
