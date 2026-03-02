@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>獎金獵人 - 員工評估報告</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: #f5f7fa; 
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .header h1 { font-size: 28px; margin-bottom: 10px; }
+        .header .subtitle { opacity: 0.9; }
+        
+        /* Card */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .card h2 {
+            color: #333;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        /* Employee Info */
+        .employee-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .info-item {
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .info-label { color: #666; font-size: 14px; }
+        .info-value { color: #333; font-size: 18px; font-weight: 600; }
+        
+        /* Scores */
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .score-item {
+            padding: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 12px;
+            color: white;
+        }
+        .score-item.ctx { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .score-item.exc { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .score-item.risk { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .score-item.collab { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        
+        .score-value { font-size: 42px; font-weight: bold; }
+        .score-label { font-size: 14px; opacity: 0.9; }
+        .score-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .score-bar-fill {
+            height: 100%;
+            background: white;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Evidence */
+        .evidence-list { list-style: none; }
+        .evidence-item {
+            padding: 16px;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            margin-bottom: 12px;
+            border-radius: 0 8px 8px 0;
+        }
+        .evidence-dimension {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .dimension-ctx { background: #e3f2fd; color: #1976d2; }
+        .dimension-exc { background: #fff3e0; color: #f57c00; }
+        .dimension-risk { background: #fce4ec; color: #c2185b; }
+        .dimension-collab { background: #e8f5e9; color: #388e3c; }
+        
+        .evidence-quote {
+            font-style: italic;
+            color: #666;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 4px;
+            margin: 8px 0;
+        }
+        .evidence-skill { color: #333; font-weight: 500; }
+        .evidence-confidence { 
+            color: #999; 
+            font-size: 12px; 
+        }
+        
+        /* Assessment */
+        .assessment-section {
+            margin-top: 20px;
+        }
+        .assessment-item {
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .assessment-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .strengths { color: #4caf50; }
+        .areas { color: #ff9800; }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏆 獎金獵人 - 員工評估報告</h1>
+            <div class="subtitle">Employee Capability Assessment Report</div>
+        </div>
+        
+        <!-- Employee Info -->
+        <div class="card">
+            <h2>👤 員工基本資料</h2>
+            <div class="employee-info">
+                <div class="info-item">
+                    <div class="info-label">姓名</div>
+                    <div class="info-value">{{employee_name}}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">部門</div>
+                    <div class="info-value">{{department}}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">職位</div>
+                    <div class="info-value">{{position}}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">評估日期</div>
+                    <div class="info-value">{{evaluation_date}}</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scores -->
+        <div class="card">
+            <h2>📊 能力維度評分</h2>
+            <div class="score-grid">
+                <div class="score-item ctx">
+                    <div class="score-label">情境判斷</div>
+                    <div class="score-value">{{context_score}}</div>
+                    <div class="score-bar"><div class="score-bar-fill" style="width: {{context_score}}%"></div></div>
+                    <div class="score-label">證據數: {{context_count}}</div>
+                </div>
+                <div class="score-item exc">
+                    <div class="score-label">異常處理</div>
+                    <div class="score-value">{{exception_score}}</div>
+                    <div class="score-bar"><div class="score-bar-fill" style="width: {{exception_score}}%"></div></div>
+                    <div class="score-label">證據數: {{exception_count}}</div>
+                </div>
+                <div class="score-item risk">
+                    <div class="score-label">風險預判</div>
+                    <div class="score-value">{{risk_score}}</div>
+                    <div class="score-bar"><div class="score-bar-fill" style="width: {{risk_score}}%"></div></div>
+                    <div class="score-label">證據數: {{risk_count}}</div>
+                </div>
+                <div class="score-item collab">
+                    <div class="score-label">團隊協作</div>
+                    <div class="score-value">{{collaboration_score}}</div>
+                    <div class="score-bar"><div class="score-bar-fill" style="width: {{collaboration_score}}%"></div></div>
+                    <div class="score-label">證據數: {{collaboration_count}}</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Evidence -->
+        <div class="card">
+            <h2>🔍 行為證據紀錄</h2>
+            {% if evidence %}
+            <ul class="evidence-list">
+                {% for e in evidence %}
+                <li class="evidence-item">
+                    <span class="evidence-dimension dimension-{{e.dimension_class}}">{{e.dimension}}</span>
+                    <div class="evidence-skill">{{e.skill}}</div>
+                    <div class="evidence-quote">"{{e.quote}}"</div>
+                    <div class="evidence-confidence">置信度: {{e.confidence}}%</div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>暫無行為證據記錄</p>
+            {% endif %}
+        </div>
+        
+        <!-- Assessment -->
+        <div class="card">
+            <h2>📝 綜合評估</h2>
+            <div class="assessment-section">
+                <div class="assessment-item">
+                    <div class="assessment-title">整體評估</div>
+                    <p>{{overall}}</p>
+                </div>
+                <div class="assessment-item">
+                    <div class="assessment-title strengths">💪 優勢</div>
+                    <ul>
+                        {% for s in strengths %}
+                        <li>{{s}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="assessment-item">
+                    <div class="assessment-title areas">🎯 發展方向</div>
+                    <ul>
+                        {% for a in areas %}
+                        <li>{{a}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>🏆 獎金獵人 - AI Employee Capability Evaluation System</p>
+            <p>Generated on {{generated_date}}</p>
+        </div>
+    </div>
+</body>
+</html>
