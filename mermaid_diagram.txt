@@ -1,0 +1,48 @@
+graph TD
+    subgraph Client_Layer [接入層 - Accessibility]
+        User((員工 Employee))
+        WA[WhatsApp Interface]
+        User <-->|經驗敘述與對話| WA
+    end
+
+    subgraph Orchestration_Layer [核心調度層 - OpenClaw Framework]
+        OC{OpenClaw<br/>Multi-Agent Orchestrator}
+        Flask[Flask Web Server]
+        WA <--> OC
+        OC <--> Flask
+    end
+
+    subgraph AI_Processing_Pipeline [AI 能力萃取流水線]
+        direction TB
+        CA[<b>Companion Agent</b><br/>經驗引導與對話擷取]
+        EE[<b>Evidence Extraction</b><br/>語意解析與行為證據提取]
+        EV[<b>Evaluator Agent</b><br/>跨產業能力映射與評分]
+        
+        CA -->|非結構化對話| EE
+        EE -->|關鍵行為證據| EV
+    end
+
+    subgraph Knowledge_Data_Layer [知識與數據層]
+        LLM[External LLM API<br/>GPT / Claude / Gemini]
+        DB[(SQLite Database<br/>能力本體與歷程紀錄)]
+        
+        subgraph Frameworks [能力轉譯核心]
+            CO[Capability Ontology]
+            TST[Transferable Skill Taxonomy]
+        end
+    end
+
+    Flask --> CA
+    EV <--> LLM
+    EV <--> DB
+    EV -.-> Frameworks
+
+    EV --> Report[📊 結構化能力評估報告]
+    Report --> Recommendation[AI 協作角色建議<br/>Risk Control Partner / Prompt Engineer]
+
+    style OC fill:#FF9900,stroke:#333,stroke-width:2px,color:#fff
+    style Flask fill:#0055CC,stroke:#333,color:#fff
+    style CA fill:#e1f5fe,stroke:#01579b
+    style EE fill:#e1f5fe,stroke:#01579b
+    style EV fill:#e1f5fe,stroke:#01579b
+    style Report fill:#fff9c4,stroke:#fbc02d,stroke-width:2px

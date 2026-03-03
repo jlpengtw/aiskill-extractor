@@ -1,0 +1,59 @@
+graph TB
+    subgraph OpenClaw_Platform [🤖 OpenClaw AI Gateway Platform]
+        direction TB
+        
+        Gateway[Gateway<br/>閘道器核心]
+        
+        subgraph Agents [多智能體系統]
+            direction LR
+            MainAgent[Main Agent<br/>主要對話代理]
+            SarahAgent[Sarah Agent<br/>分離代理]
+        end
+        
+        subgraph Channels [通訊管道]
+            direction LR
+            WA[WhatsApp]
+            TG[Telegram]
+            DC[Discord]
+        end
+        
+        subgraph Tools [工具集]
+            direction LR
+            Exec[執行命令]
+            Browser[瀏覽器控制]
+            Memory[記憶管理]
+            Calendar[日曆]
+            Gmail[ Gmail]
+            WebSearch[網路搜尋]
+        end
+        
+        subgraph Runtime [執行環境]
+            direction LR
+            NodeJS[Node.js]
+            LLM[LLM API<br/>MiniMax/GPT/Gemini]
+        end
+    end
+    
+    subgraph User_Interaction [使用者互動]
+        Employee[員工]
+        Manager[管理者]
+        Admin[系統管理員]
+    end
+    
+    Employee -->|對話| WA
+    Employee -->|對話| TG
+    Manager -->|查看報告| WA
+    Admin -->|系統管理| Gateway
+    
+    Gateway <--> Agents
+    Gateway <--> Channels
+    Gateway <--> Tools
+    Gateway <--> Runtime
+    
+    LLM -->|AI 推理| Gateway
+    
+    style Gateway fill:#FF6B00,stroke:#333,stroke-width:2px,color:#fff
+    style Agents fill:#4ECDC4,stroke:#333
+    style Channels fill:#45B7D1,stroke:#333
+    style Tools fill:#96CEB4,stroke:#333
+    style Runtime fill:#FFEAA7,stroke:#333
