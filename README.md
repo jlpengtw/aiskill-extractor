@@ -1,4 +1,4 @@
-# AI Skill Extractor
+# AI Capability Extraction Platform
 ## AI Employee Capability Evaluation System
 
 ---

@@ -59,7 +59,7 @@
 |------|------|
 | **帳號** | jlpengtw |
 | **Repository** | https://github.com/jlpengtw/aiskill-extractor |
-| **說明** | AI Skill Extractor 專案完整程式碼，包含 Companion Agent、Evidence Extraction、Evaluator 三大模組 |
+| **說明** | AI Capability Extraction Platform 專案完整程式碼，包含 Companion Agent、Evidence Extraction、Evaluator 三大模組 |
 
 **截圖說明：**
 - Repository 首頁截圖
